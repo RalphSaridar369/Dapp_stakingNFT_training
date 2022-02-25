@@ -3,6 +3,7 @@ import logo from './logo.png';
 import './App.css';
 import Web3 from 'web3';
 import Navbar from './Components/Navbar/Navbar';
+import Drawer from './Components/Drawer/Drawer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +20,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 
 const App = () => {
   const [account, setAccount] = useState("0x00");
+  const [open,setOpen] = useState(false);
   const [ownerAccount, setOwnerAccout] = useState(false);
   const [tokenData, setTokenData] = useState({
     basicTokenBalance:0,
@@ -97,8 +99,10 @@ const App = () => {
   }, [])
   return (
     <div>
-      <Navbar account={account} />
-      <AppContext.Provider value={{tokenData:tokenData, ownerAccount:ownerAccount}}>
+    <AppContext.Provider value={{tokenData:tokenData, ownerAccount:ownerAccount}}>
+      <Navbar account={account} setOpen={()=>setOpen(!open)}/>
+      <div style={{display:'flex', flexDirection:'row'}}>
+        <Drawer open={open}/>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -112,6 +116,7 @@ const App = () => {
             </Route>
           </Switch>
         </Router>
+        </div>
       </AppContext.Provider>
     </div>
   );
