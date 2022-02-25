@@ -7,7 +7,7 @@
   width:0px;
   background-color: #a8b0d8;
   opacity: 0.5;
-  transition: margin 1.4s, width 1.4s;
+  transition: width 1.4s;
   height: 90vh;
 }
 
@@ -16,7 +16,6 @@
   display: flex;
   flex-direction: column;
   margin:30px;
-  transition: margin-left 1s;
 }
 
 .navbar__left__links__container a{
