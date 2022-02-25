@@ -23,4 +23,8 @@ contract BasicToken is ERC20 {
     function mintTokens(uint256 _amount) public onlyOwner(){
         _mint(owner,_amount);
     }
+
+    function returnOwnerAddress() public view returns (address){
+        return owner;
+    }
 }
