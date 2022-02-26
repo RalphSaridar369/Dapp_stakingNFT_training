@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+    text-wrap:wrap;
     padding:30px 60px;
 }
 
@@ -11,7 +11,11 @@
 }
 
 .whitelist__left p{
-    width: 80%;
+    width: 100%;
+}
+.whitelist__right{
+    margin-left: 40px;
+    text-align: center;
 }
 
 .whitelist__right__img{
@@ -21,8 +25,8 @@
 
 @media only screen and (max-width:1500px) {
     .whitelist__right__img{
-        width: 600px;
-        height: 300px;
+        width: 80%;
+        height: 60%;
     }
 }
 
