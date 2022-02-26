@@ -11,21 +11,6 @@ const Whitelist = () =>{
             <div className='whitelist__right'>
                 <img src="./whitelist_img.jpg" className='whitelist__right__img'/>
             </div>
-            <div className='whitelist__right'>
-                <img src="./whitelist_img.jpg" className='whitelist__right__img'/>
-            </div>
-            <div className='whitelist__right'>
-                <img src="./whitelist_img.jpg" className='whitelist__right__img'/>
-            </div>
-            <div className='whitelist__right'>
-                <img src="./whitelist_img.jpg" className='whitelist__right__img'/>
-            </div>
-            <div className='whitelist__right'>
-                <img src="./whitelist_img.jpg" className='whitelist__right__img'/>
-            </div>
-            <div className='whitelist__right'>
-                <img src="./whitelist_img.jpg" className='whitelist__right__img'/>
-            </div>
         </div>
     )
 }
