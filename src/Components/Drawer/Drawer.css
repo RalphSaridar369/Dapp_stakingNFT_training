@@ -16,6 +16,8 @@
   flex-direction: column;
   margin:30px;
   position: sticky;
+  opacity: 0;
+  transition: opacity 2s;
 }
 
 .navbar__left__links__container a{
