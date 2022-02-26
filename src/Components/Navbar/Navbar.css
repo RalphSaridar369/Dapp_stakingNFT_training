@@ -1,11 +1,14 @@
 .navbar {
     height: 7.5vh;
     background-color: #a8b0d8;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    position: fixed;
+
 }
 
 .navbar__left {

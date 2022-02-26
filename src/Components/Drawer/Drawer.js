@@ -8,8 +8,8 @@ const Drawer = ({ open }) =>{
         <div className='navbar__left__links__container'
           style={{ 
             //   margin:open ? "30px" : "0px",
-              /* padding: open? "0px 20px" : "0px",
-              display: open? "flex":'none'  */}}>
+              // padding: open? "0px 20px" : "0px",
+              display: open? "flex":'none' }}>
           <a href="/" style={{ color: 'white' }}>Whitelist</a>
           <a href="/dashboard" style={{ color: 'white' }}>Dashboard</a>
           <a href="/" style={{ color: 'white' }}>Stake</a>

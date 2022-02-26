@@ -1,19 +1,21 @@
 .navbar__left__drawer__container{
-  z-index: 99;
   display: flex;
   width:0px;
   flex-direction: row;
+  margin-top: 7.5vh;
   background-color: #a8b0d8;
-  opacity: 0.5;
   transition: width 1.4s;
   height: inherit;
+  /* height: 92.5vh; */
 }
 
 .navbar__left__links__container{
   margin-top: 30px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   margin:30px;
+  position: sticky;
 }
 
 .navbar__left__links__container a{

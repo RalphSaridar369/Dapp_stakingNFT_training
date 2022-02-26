@@ -103,19 +103,21 @@ const App = () => {
       <Navbar account={account} setOpen={()=>setOpen(!open)}/>
       <div style={{display:'flex', flexDirection:'row'}}>
         <Drawer open={open}/>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Whitelist />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/">
-              <Whitelist />
-            </Route>
-          </Switch>
-        </Router>
+        <div style={{marginTop:'7.5vh'}}>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <Whitelist />
+              </Route>
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route path="/">
+                <Whitelist />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
         </div>
       </AppContext.Provider>
     </div>
