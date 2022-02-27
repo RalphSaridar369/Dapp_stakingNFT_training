@@ -5,8 +5,8 @@
   margin-top: 7.5vh;
   background-color: #a8b0d8;
   transition: width 1.4s;
+  height: 92.5vh;
   height: inherit;
-  /* height: 92.5vh; */
 }
 
 .navbar__left__links__container{

@@ -5,8 +5,10 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract BasicToken is ERC20 {
     
     address private owner;
+    uint256 public cost;
 
     constructor() ERC20("BasicToken", "BST"){
+        cost = 2; 
         _mint(msg.sender, 10000);
         owner = msg.sender;
     }

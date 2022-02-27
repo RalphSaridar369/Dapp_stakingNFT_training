@@ -13,18 +13,20 @@ import {
 
 import { AppContext } from './AppContext';
 
-import BasicToken from './abis/BasicToken.json'; 
+import BasicToken from './abis/BasicToken.json';
 
 import Whitelist from './Components/Whitelist/Whitelist';
 import Dashboard from './Components/Dashboard/Dashboard';
 
 const App = () => {
   const [account, setAccount] = useState("0x00");
-  const [open,setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [ownerAccount, setOwnerAccout] = useState(false);
   const [tokenData, setTokenData] = useState({
-    basicTokenBalance:0,
-    yourBalance:0,
+    basicTokenBalance: 0,
+    yourBalance: 0,
+    totalSupply: 0,
+    cost: 0,
   });
   //Load the web3 aka metamask
   const loadWeb3 = async () => {
@@ -52,39 +54,26 @@ const App = () => {
 
     //load contract as folllowing
     const basicTokenData = BasicToken.networks[networkId];
-    if(basicTokenData){
-      const basicToken = new web3.eth.Contract(BasicToken.abi,basicTokenData.address);
+    if (basicTokenData) {
+      const basicToken = new web3.eth.Contract(BasicToken.abi, basicTokenData.address);
       let basicTokenBalance = await basicToken.methods.totalSupply().call();
-      // console.log("Balance Dai: ",basicTokenBalance.toString())
-      
-      if(basicTokenBalance){
-        basicTokenBalance = basicTokenBalance.toString();
-        console.log("Balance Dai: ",basicTokenBalance.toString())
-      }
-      else{
-        basicTokenBalance = 0;
-      }
-
       let yourBalance = await basicToken.methods.balanceOf(accounts[0]).call();
-      // console.log("Balance Dai: ",yourBalance.toString())
-      
-      if(yourBalance){
-        yourBalance = yourBalance.toString();
-        console.log("Balance Dai: ",yourBalance.toString())
-      }
-      else{
-        yourBalance = 0;
-      }
+      const address_owner = await basicToken.methods.returnOwnerAddress().call();
+      const totalSupply = await basicToken.methods.totalSupply().call();
+      const cost = await basicToken.methods.cost().call();
 
-      let owner = false;
-      const address_owner = await basicToken.methods.returnOwnerAddress().call()
-      if(accounts[0] == address_owner)
-        owner=true;
 
-      setTokenData({...tokenData,basicToken:basicToken,basicTokenBalance:basicTokenBalance.toString(), yourBalance:yourBalance});
-      setOwnerAccout(owner);
+      setTokenData({
+        ...tokenData,
+        basicToken: basicToken,
+        basicTokenBalance: basicTokenBalance.toString() || 0,
+        yourBalance: yourBalance.toString() || 0,
+        totalSupply: totalSupply.toString() || 0,
+        cost: parseFloat(cost).toFixed(2).toString() || 0
+      });
+      setOwnerAccout(accounts[0] == address_owner);
     }
-    else{
+    else {
       window.alert("DaiToken contract not deployed to detected network");
     }
   }
@@ -99,25 +88,29 @@ const App = () => {
   }, [])
   return (
     <div>
-    <AppContext.Provider value={{tokenData:tokenData, ownerAccount:ownerAccount}}>
-      <Navbar account={account} setOpen={()=>setOpen(!open)}/>
-      <div style={{display:'flex', flexDirection:'row'}}>
-        <Drawer open={open}/>
-        <div style={{marginTop:'7.5vh'}}>
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <Whitelist />
-              </Route>
-              <Route path="/dashboard">
-                <Dashboard />
-              </Route>
-              <Route path="/">
-                <Whitelist />
-              </Route>
-            </Switch>
-          </Router>
-        </div>
+      <AppContext.Provider value={{ tokenData: tokenData, ownerAccount: ownerAccount }}>
+        <Navbar account={account} setOpen={() => setOpen(!open)} />
+        <div style={{
+          display: "flex",
+          flexDirection: "row",
+          width: "100%",
+        }}>
+          <Drawer open={open} />
+          <div style={{ width: '100%', marginTop:'100px' }}>
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <Whitelist />
+                </Route>
+                <Route path="/dashboard">
+                  <Dashboard />
+                </Route>
+                <Route path="/">
+                  <Whitelist />
+                </Route>
+              </Switch>
+            </Router>
+          </div>
         </div>
       </AppContext.Provider>
     </div>

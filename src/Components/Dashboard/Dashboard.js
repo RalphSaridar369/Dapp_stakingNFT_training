@@ -1,24 +1,42 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import './Dashboard.css';
 
 import { AppContext } from '../../AppContext';
 
-const Dashboard = () =>{
-    let {tokenData, ownerAccount} = useContext(AppContext);
+const Dashboard = () => {
+    let { tokenData, ownerAccount } = useContext(AppContext);
     console.log(tokenData);
-    return(
+    return (
         <div className='dashboard'>
-            <div className='tokens__container'>
-                {ownerAccount && <div className='tokens'>
-                <h2>Tokens left</h2>
-                    <p className='tokens_left'>{tokenData.basicTokenBalance}</p>
-                    <img src="./token_img.png" className='img_token'/>
+            <div className='dashboard__container'>
+                {ownerAccount && <div className='dashboard__info'>
+                    <h2>Tokens left</h2>
+                    <div className='dashboard__info__inner'>
+                        <p className='tokens__left'>{tokenData.yourBalance}</p>
+                        <img src="./token_img.png" className='img__token' />
+                    </div>
                 </div>}
-                <div className='tokens'>
-                <div>
-                    <h2>Your tokens</h2>
-                        <p className='tokens_left'>{tokenData.yourBalance}</p>
-                        <img src="./token_img.png" className='img_token'/>
+                <div className='dashboard__info'>
+                    <h2>Your Tokens</h2>
+                    <div className='dashboard__info__inner'>
+                        <p className='tokens__left'>{tokenData.yourBalance}</p>
+                        <img src="./token_img.png" className='img__token' />
+                    </div>
+                </div>
+            </div>
+            <div className='dashboard__container'>
+                {ownerAccount && <div className='dashboard__info'>
+                    <h2>Total Supply</h2>
+                    <div className='dashboard__info__inner'>
+                        <p className='tokens__left'>{tokenData.totalSupply}</p>
+                        <img src="./token_img.png" className='img__token' />
+                    </div>
+                </div>}
+                <div className='dashboard__info'>
+                    <h2>Price</h2>
+                    <div className='dashboard__info__inner'>
+                        <p className='tokens__left'>${tokenData.cost}</p>
+                        <img src="./token_img.png" className='img__token' />
                     </div>
                 </div>
             </div>

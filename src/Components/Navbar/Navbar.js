@@ -6,6 +6,11 @@ const Navbar = ({ account, setOpen }) => {
   // useEffect(() => {
   // }, [])
 
+  const connectWallet = async() =>{
+    await window.web3.request({ method: 'eth_requestAccounts' })
+    // await window.ethereum.request({ method: 'eth_requestAccounts' });
+  }
+
   return (
     <>
       <div className='navbar'>
@@ -19,7 +24,9 @@ const Navbar = ({ account, setOpen }) => {
             <img src="./menu.png" style={{ width: '30px', height: '30px' }} />
           </a>
           <div className='navbar__right'>
-            <p>{account}</p>
+            {account =="0x00"?
+            <a className='connect__button' onClick={()=>connectWallet()}>Connect Wallet</a>
+            :<p>{account}</p>}
           </div>
       </div>
     </>

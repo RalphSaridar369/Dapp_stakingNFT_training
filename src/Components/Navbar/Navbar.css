@@ -52,6 +52,13 @@
     cursor: pointer;
 }
 
+.connect__button{
+    color: #fff!important;
+}
+
+.connect__button:hover{
+    cursor: pointer;
+}
 
 @media only screen and (max-width:1500px) {
     .navbar__left a, .navbar__right p{
