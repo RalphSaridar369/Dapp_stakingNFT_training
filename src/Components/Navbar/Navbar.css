@@ -54,10 +54,11 @@
 
 .connect__button{
     color: #fff!important;
+    z-index: 99;
 }
 
 .connect__button:hover{
-    cursor: pointer;
+    cursor: pointer!important;
 }
 
 @media only screen and (max-width:1500px) {

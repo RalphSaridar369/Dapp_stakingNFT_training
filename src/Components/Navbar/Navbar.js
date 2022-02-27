@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
+import Web3 from 'web3';
 
 const Navbar = ({ account, setOpen }) => {
   // const [icon, setIcon] = useState();
   // useEffect(() => {
   // }, [])
-
-  const connectWallet = async() =>{
-    await window.web3.request({ method: 'eth_requestAccounts' })
-    // await window.ethereum.request({ method: 'eth_requestAccounts' });
-  }
 
   return (
     <>
@@ -25,7 +21,7 @@ const Navbar = ({ account, setOpen }) => {
           </a>
           <div className='navbar__right'>
             {account =="0x00"?
-            <a className='connect__button' onClick={()=>connectWallet()}>Connect Wallet</a>
+            <a className='connect__button'>Connect Wallet</a>
             :<p>{account}</p>}
           </div>
       </div>
