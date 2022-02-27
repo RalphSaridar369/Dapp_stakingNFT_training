@@ -1,0 +1,50 @@
+.stake__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 100px;
+}
+.stake__container__left,
+.stake__container__right {
+    width: 100%;
+    margin: 0 40px;
+}
+
+.stake__container__nft {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.stake__nft {
+    margin-bottom: 30px;
+    height: 200px !important;
+    width: 200px !important;
+}
+
+.stake__header__container {
+    display: "flex" !important;
+    flex-direction: "row" !important;
+    justify-content: "space-between";
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.stake__header__text {
+    display: inline;
+}
+
+.stake__header__button {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 1600px) {
+    .stake__container__nft {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .stake__container__nft {
+        grid-template-columns: 100%;
+    }
+}

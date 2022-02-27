@@ -12,7 +12,7 @@ const Drawer = ({ open }) =>{
               opacity: open? 1:0 }}>
           <a href="/" style={{ color: 'white' }}>Whitelist</a>
           <a href="/dashboard" style={{ color: 'white' }}>Dashboard</a>
-          <a href="/" style={{ color: 'white' }}>Stake</a>
+          <a href="/staking" style={{ color: 'white' }}>Stake</a>
         </div>
       </div>
     )

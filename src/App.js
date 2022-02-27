@@ -17,6 +17,7 @@ import BasicToken from './abis/BasicToken.json';
 
 import Whitelist from './Components/Whitelist/Whitelist';
 import Dashboard from './Components/Dashboard/Dashboard';
+import Stake from './Components/Stake/Stake';
 
 const App = () => {
   const [account, setAccount] = useState("0x00");
@@ -105,8 +106,8 @@ const App = () => {
                 <Route path="/dashboard">
                   <Dashboard />
                 </Route>
-                <Route path="/">
-                  <Whitelist />
+                <Route path="/staking">
+                  <Stake />
                 </Route>
               </Switch>
             </Router>

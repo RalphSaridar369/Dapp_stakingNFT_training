@@ -13,7 +13,7 @@ const Navbar = ({ account, setOpen }) => {
           <div className='navbar__left'>
             <a href="/">Whitelist</a>
             <a href="/dashboard">Dashboard</a>
-            <a href="/">Stake</a>
+            <a href="/staking">Stake</a>
           </div>
           <a className='navbar__left__drawer__icon'
             onClick={setOpen}>

@@ -3,7 +3,7 @@ pragma solidity 0.8.11;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract BasicToken is ERC20Burnable {
+contract BasicToken is ERC20 {
     
     uint256 public totSupply;
     address private owner;
@@ -11,8 +11,6 @@ contract BasicToken is ERC20Burnable {
 
     constructor() ERC20("BasicToken", "BST"){
         cost = 2; 
-        _mint(msg.sender, 10000);
-        totSupply = 90000;
         owner = msg.sender;
     }
 
@@ -22,8 +20,7 @@ contract BasicToken is ERC20Burnable {
     }
 
     function burnTokens(uint256 _amount) public onlyOwner() returns (string memory){
-        burn(_amount);
-        totSupply -= _amount;
+        _burn(owner,_amount);
         return "Done Burning";
     }
 

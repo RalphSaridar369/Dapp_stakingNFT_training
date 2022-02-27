@@ -15,7 +15,7 @@ const Dashboard = () => {
             alert("Value must be greater than 0");
         }
         else{
-            let test = await tokenData.basicToken.methods.burnTokens(parseInt(input.burn)).call();
+            let test = await tokenData.basicToken.methods[type==="mint"?'mintTokens':'burnTokens'](parseInt(input[type])).call();
             console.log(test)
             let TS = await tokenData.basicToken.methods.totSupply().call()
             console.log(TS.toString())
