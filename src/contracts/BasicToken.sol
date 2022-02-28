@@ -5,12 +5,10 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
 contract BasicToken is ERC20 {
     
-    uint256 public totSupply;
     address private owner;
     uint256 public cost;
-
     constructor() ERC20("BasicToken", "BST"){
-        cost = 2; 
+        _mint(msg.sender,10000);
         owner = msg.sender;
     }
 
@@ -19,14 +17,16 @@ contract BasicToken is ERC20 {
        _;
     }
 
-    function burnTokens(uint256 _amount) public onlyOwner() returns (string memory){
+    function burnTokens(uint256 _amount) public onlyOwner() returns (uint256){
         _burn(owner,_amount);
-        return "Done Burning";
+        uint256 totalSupply = totalSupply();
+        return totalSupply;
     }
 
-    function mintTokens(uint256 _amount) public onlyOwner() returns (string memory){
+    function mintTokens(uint256 _amount) public onlyOwner() returns (uint256){
         _mint(owner,_amount);
-        return "Done";
+        uint256 totalSupply = totalSupply();
+        return totalSupply;
     }
 
     function returnOwnerAddress() public view returns (address){

@@ -61,7 +61,7 @@ const App = () => {
       let basicTokenBalance = await basicToken.methods.totalSupply().call();
       let yourBalance = await basicToken.methods.balanceOf(accounts[0]).call();
       const address_owner = await basicToken.methods.returnOwnerAddress().call();
-      const totalSupply = await basicToken.methods.totSupply().call();
+      const totalSupply = await basicToken.methods.totalSupply().call();
       const cost = await basicToken.methods.cost().call();
       console.log(totalSupply.toString())
       setTokenData({

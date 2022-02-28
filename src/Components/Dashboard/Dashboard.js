@@ -16,9 +16,10 @@ const Dashboard = () => {
         }
         else{
             let test = await tokenData.basicToken.methods[type==="mint"?'mintTokens':'burnTokens'](parseInt(input[type])).call();
-            console.log(test)
-            let TS = await tokenData.basicToken.methods.totSupply().call()
-            console.log(TS.toString())
+            console.log(test.toString())
+            let TS = await tokenData.basicToken.methods.totalSupply().call()
+            let ts = await tokenData.basicToken.methods.TS().call()
+            console.log(TS.toString(), "  ", ts.toString());
             // await tokenData.basicToken.methods[type=="burn"?"burnTokens":"mintTokens"](parseInt(input[type])).call();
             // alert(`${type=="burn"?"Burned":"Minted"} Successfully`);
         }
@@ -80,21 +81,21 @@ const Dashboard = () => {
             </div>
             <div className='dashboard__container'>
                 <div className='dashboard__info'>
-                    <h2>Mint</h2>
+                    <h2>Buy</h2>
                     <div className='dashboard__info__inner'>
                         <input type="text" onChange={(e) => setInput({...input,mint:e.target.value})}
                         value={input.mint} />
                         <img src="./token_img.png" className='img__token' />
-                        <button onClick={()=>burnOrMint("mint")}>Mint</button>
+                        <button onClick={()=>burnOrMint("mint")}>Buy</button>
                     </div>
                 </div>
                 <div className='dashboard__info'>
-                    <h2>Burn</h2>
+                    <h2>Sell</h2>
                     <div className='dashboard__info__inner'>
                         <input type="text" onChange={(e) => setInput({...input,burn:e.target.value})}
                         value={input.burn} />
                         <img src="./token_img.png" className='img__token' />
-                        <button onClick={()=>burnOrMint("burn")}>Burn</button>
+                        <button onClick={()=>burnOrMint("burn")}>Sell</button>
                     </div>
                 </div>
             </div>
