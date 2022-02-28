@@ -49,7 +49,7 @@ const App = () => {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
     console.log(accounts);
-    await setAccount(accounts[0])
+    setAccount(accounts[0])
 
     const networkId = await web3.eth.net.getId();
     console.log(networkId)
@@ -60,7 +60,7 @@ const App = () => {
       const basicToken = new web3.eth.Contract(BasicToken.abi, basicTokenData.address);
       let basicTokenBalance = await basicToken.methods.totalSupply().call();
       let yourBalance = await basicToken.methods.balanceOf(accounts[0]).call();
-      const address_owner = await basicToken.methods.returnOwnerAddress().call();
+      const address_owner = await basicToken.methods.owner().call();
       const totalSupply = await basicToken.methods.totalSupply().call();
       const cost = await basicToken.methods.cost().call();
       console.log(totalSupply.toString())
@@ -89,7 +89,7 @@ const App = () => {
   }, [])
   return (
     <div>
-      <AppContext.Provider value={{ tokenData: tokenData, ownerAccount: ownerAccount }}>
+      <AppContext.Provider value={{ tokenData: tokenData, ownerAccount: ownerAccount, account:account }}>
         <Navbar account={account} setOpen={() => setOpen(!open)} />
         <div style={{
           display: "flex",

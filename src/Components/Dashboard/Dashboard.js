@@ -5,7 +5,7 @@ import { AppContext } from '../../AppContext';
 
 const Dashboard = () => {
 
-    let { tokenData, ownerAccount } = useContext(AppContext);
+    let { tokenData, ownerAccount, account } = useContext(AppContext);
     const [input,setInput] = useState({
         mint:'0',
         burn:'0',
@@ -15,11 +15,9 @@ const Dashboard = () => {
             alert("Value must be greater than 0");
         }
         else{
-            let test = await tokenData.basicToken.methods[type==="mint"?'mintTokens':'burnTokens'](parseInt(input[type])).call();
-            console.log(test.toString())
-            let TS = await tokenData.basicToken.methods.totalSupply().call()
-            let ts = await tokenData.basicToken.methods.TS().call()
-            console.log(TS.toString(), "  ", ts.toString());
+            let test = await tokenData.basicToken.methods[type==="mint"?'mint':'burnTokens'](parseInt(input[type])).send({from:account});
+            let TS = await tokenData.basicToken.methods.balanceOf(account).call()
+            console.log(TS.toString(), "  " ,test.toString())
             // await tokenData.basicToken.methods[type=="burn"?"burnTokens":"mintTokens"](parseInt(input[type])).call();
             // alert(`${type=="burn"?"Burned":"Minted"} Successfully`);
         }

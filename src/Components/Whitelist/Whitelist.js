@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../AppContext';
 import './Whitelist.css';
 
 const Whitelist = () =>{
+
     return(
         <div className='whitelist'>
             <div className='whitelist__left'>
