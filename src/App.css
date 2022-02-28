@@ -21,3 +21,7 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #a8b0d8;
   }
+
+  .body__container{
+    transition: margin-left 1.4s;
+  }

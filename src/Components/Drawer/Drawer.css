@@ -7,16 +7,18 @@
   transition: width 1.4s;
   height: 92.5vh;
   height: inherit;
+  position: fixed;
 }
 
 .navbar__left__links__container{
   margin-top: 30px;
   padding-top: 20px;
+  height: 92.5vh;
   display: flex;
   flex-direction: column;
   margin:30px;
   opacity: 0;
-  transition: opacity 2s;
+  transition: opacity 1s;
 }
 
 .navbar__left__links__container a{

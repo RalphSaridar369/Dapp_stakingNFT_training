@@ -97,7 +97,7 @@ const App = () => {
           width: "100%",
         }}>
           <Drawer open={open} />
-          <div style={{ width: '100%', marginTop:'100px' }}>
+          <div className="body__container" style={{ width: '100%', marginTop:'100px', marginLeft:open?"200px":"0px" }}>
             <Router>
               <Switch>
                 <Route exact path="/">
