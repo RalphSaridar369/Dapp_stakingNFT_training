@@ -10,6 +10,11 @@ const Dashboard = () => {
         mint:'0',
         burn:'0',
     })
+    const [buysell,setBuysell] = useState({
+        buy:'0',
+        sell:'0',
+    })
+
     const burnOrMint = async(type) =>{
         if(parseInt(input[type])<1){
             alert("Value must be greater than 0");
@@ -17,9 +22,16 @@ const Dashboard = () => {
         else{
             let test = await tokenData.basicToken.methods[type==="mint"?'mint':'burnTokens'](parseInt(input[type])).send({from:account});
             let TS = await tokenData.basicToken.methods.balanceOf(account).call()
-            console.log(TS.toString(), "  " ,test.toString())
-            // await tokenData.basicToken.methods[type=="burn"?"burnTokens":"mintTokens"](parseInt(input[type])).call();
-            // alert(`${type=="burn"?"Burned":"Minted"} Successfully`);
+            console.log(TS.toString(), "  ",test.toString())
+        }
+    }
+
+    const buyOrSell = async(type) =>{
+        if(parseInt(buysell[type])<1){
+            alert("Value must be greater than 0");
+        }
+        else{
+            
         }
     }
 
@@ -57,7 +69,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <div className='dashboard__container'>
+            {ownerAccount && <div className='dashboard__container'>
                 <div className='dashboard__info'>
                     <h2>Mint</h2>
                     <div className='dashboard__info__inner'>
@@ -76,24 +88,24 @@ const Dashboard = () => {
                         <button onClick={()=>burnOrMint("burn")}>Burn</button>
                     </div>
                 </div>
-            </div>
+            </div>}
             <div className='dashboard__container'>
                 <div className='dashboard__info'>
                     <h2>Buy</h2>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setInput({...input,mint:e.target.value})}
-                        value={input.mint} />
+                        <input type="text" onChange={(e) => setBuysell({...buysell,buy:e.target.value})}
+                        value={buysell.buy} />
                         <img src="./token_img.png" className='img__token' />
-                        <button onClick={()=>burnOrMint("mint")}>Buy</button>
+                        <button onClick={()=>buyOrSell("buy")}>Buy</button>
                     </div>
                 </div>
                 <div className='dashboard__info'>
                     <h2>Sell</h2>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setInput({...input,burn:e.target.value})}
-                        value={input.burn} />
+                        <input type="text" onChange={(e) => setBuysell({...buysell,sell:e.target.value})}
+                        value={buysell.sell} />
                         <img src="./token_img.png" className='img__token' />
-                        <button onClick={()=>burnOrMint("burn")}>Sell</button>
+                        <button onClick={()=>buyOrSell("sell")}>Sell</button>
                     </div>
                 </div>
             </div>
