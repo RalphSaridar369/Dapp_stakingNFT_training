@@ -7,13 +7,14 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract BasicToken is ERC20, ERC20Burnable, Ownable {
     
     uint256 public cost;
+
     constructor() ERC20("BasicToken", "BST"){
-        cost = 1 ether / 10;
+        cost = 1*10**17;
     }
 
     function changePriceOfToken(uint256 _price) public onlyOwner{
-        require(_price >0, "Price must be higher than zero");
-        cost = _price ether /10;
+        require(_price > 5*10**16, "Price must be higher than 0.05");
+        cost = _price;
     }
 
     function burnTokens(uint256 _amount) public onlyOwner {

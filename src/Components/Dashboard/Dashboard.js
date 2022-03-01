@@ -7,14 +7,14 @@ const Dashboard = () => {
     let { tokenData, ownerAccount, account, decimals } = useContext(AppContext);
 
     const [input,setInput] = useState({
-        mint:'0',
-        burn:'0',
+        mint:'',
+        burn:'',
     })
     const [buysell,setBuysell] = useState({
-        buy:'0',
-        sell:'0',
+        buy:'',
+        sell:'',
     })
-    const [price,setPrice] = useState("0");
+    const [price,setPrice] = useState("");
 
     const burnOrMint = async(type) =>{
         if(parseInt(input[type])<1){
@@ -38,26 +38,31 @@ const Dashboard = () => {
     }
 
     const changeTokenPrice = async() =>{
-        if(parseInt(price)<1){
-            alert("Value must be greater than 0");
+        console.log(price===1*10**18)
+        console.log(price.toString().length,"\n",(1*10**18).toString().length)
+        console.log(typeof price, "\n", typeof(1*10**18))
+        if(price==1*10**18){
+            alert(true)
+        }
+        if((price*10**18)<5 * 10**16){
+            alert("Value must be greater than 0.01");
         }
         else{
-            await tokenData.basicToken.methods.changePriceOfToken(parseInt(price)).send({from:account})
+            await tokenData.basicToken.methods.changePriceOfToken(price*10**18+"").send({from:account})
         }
     }
-
     return (
         <div className='dashboard'>
             <div className='dashboard__container'>
                 {ownerAccount && <div className='dashboard__info'>
-                    <h2>Tokens left</h2>
+                    <h5>Tokens left</h5>
                     <div className='dashboard__info__inner'>
                         <p className='tokens__left'>{tokenData.basicTokenBalance}</p>
                         <img src="./token_img.png" className='img__token' />
                     </div>
                 </div>}
                 <div className='dashboard__info'>
-                    <h2>Your Tokens</h2>
+                    <h5>Your Tokens</h5>
                     <div className='dashboard__info__inner'>
                         <p className='tokens__left'>{tokenData.yourBalance}</p>
                         <img src="./token_img.png" className='img__token' />
@@ -66,34 +71,34 @@ const Dashboard = () => {
             </div>
             <div className='dashboard__container'>
                 {ownerAccount && <div className='dashboard__info'>
-                    <h2>Total Supply</h2>
+                    <h5>Total Supply</h5>
                     <div className='dashboard__info__inner'>
                         <p className='tokens__left'>{tokenData.totalSupply}</p>
                         <img src="./token_img.png" className='img__token' />
                     </div>
                 </div>}
                 <div className='dashboard__info'>
-                    <h2>Price</h2>
+                    <h5>Price</h5>
                     <div className='dashboard__info__inner'>
-                        <p className='tokens__left'>ETH {tokenData.cost/decimals}</p>
+                        <p className='tokens__left'>ETH {tokenData.cost}</p>
                         <img src="./token_img.png" className='img__token' />
                     </div>
                 </div>
             </div>
             {ownerAccount && <div className='dashboard__container'>
                 <div className='dashboard__info'>
-                    <h2>Mint</h2>
+                    <h5>Mint</h5>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setInput({...input,mint:e.target.value})}
+                        <input placeholder="0" type="text" onChange={(e) => setInput({...input,mint:e.target.value})}
                         value={input.mint} />
                         <img src="./token_img.png" className='img__token' />
                         <button onClick={()=>burnOrMint("mint")}>Mint</button>
                     </div>
                 </div>
                 <div className='dashboard__info'>
-                    <h2>Burn</h2>
+                    <h5>Burn</h5>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setInput({...input,burn:e.target.value})}
+                        <input placeholder="0" type="text" onChange={(e) => setInput({...input,burn:e.target.value})}
                         value={input.burn} />
                         <img src="./token_img.png" className='img__token' />
                         <button onClick={()=>burnOrMint("burn")}>Burn</button>
@@ -102,18 +107,18 @@ const Dashboard = () => {
             </div>}
             <div className='dashboard__container'>
                 <div className='dashboard__info'>
-                    <h2>Buy</h2>
+                    <h5>Buy</h5>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setBuysell({...buysell,buy:e.target.value})}
+                        <input placeholder="0" type="text" onChange={(e) => setBuysell({...buysell,buy:e.target.value})}
                         value={buysell.buy} />
                         <img src="./token_img.png" className='img__token' />
                         <button onClick={()=>buyOrSell("buy")}>Buy</button>
                     </div>
                 </div>
                 <div className='dashboard__info'>
-                    <h2>Sell</h2>
+                    <h5>Sell</h5>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setBuysell({...buysell,sell:e.target.value})}
+                        <input placeholder="0" type="text" onChange={(e) => setBuysell({...buysell,sell:e.target.value})}
                         value={buysell.sell} />
                         <img src="./token_img.png" className='img__token' />
                         <button onClick={()=>buyOrSell("sell")}>Sell</button>
@@ -122,9 +127,9 @@ const Dashboard = () => {
             </div>
             {ownerAccount && <div className='dashboard__container'>
                 <div className='dashboard__info'>
-                    <h2>Change Price</h2>
+                    <h5>Change Price</h5>
                     <div className='dashboard__info__inner'>
-                        <input type="text" onChange={(e) => setPrice(e.target.value)}
+                        <input placeholder="0" type="text" onChange={(e) => setPrice(e.target.value)}
                         value={price} />
                         <img src="./token_img.png" className='img__token' />
                         <button onClick={()=>changeTokenPrice()}>Change</button>

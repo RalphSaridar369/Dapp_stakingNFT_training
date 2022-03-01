@@ -65,7 +65,6 @@ const App = () => {
       const totalSupply = await basicToken.methods.totalSupply().call();
       const cost = await basicToken.methods.cost().call();
       const tokenAddress = basicTokenData.address;
-
       console.log(totalSupply.toString())
       setTokenData({
         ...tokenData,
@@ -75,7 +74,7 @@ const App = () => {
         totalSupply: totalSupply.toString() || 0,
         tokenAddress:tokenAddress,
         address_owner:address_owner,
-        cost: parseFloat(cost).toFixed(2).toString() || 0
+        cost: (cost.toString()/10**18) || 0
       });
       setOwnerAccout(accounts[0] == address_owner);
     }
