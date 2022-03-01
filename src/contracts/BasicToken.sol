@@ -11,13 +11,34 @@ contract BasicToken is ERC20, ERC20Burnable, Ownable {
         cost = 1 ether / 10;
     }
 
+    function changePriceOfToken(uint256 _price) public onlyOwner{
+        require(_price >0, "Price must be higher than zero");
+        cost = _price ether /10;
+    }
+
     function burnTokens(uint256 _amount) public onlyOwner {
+        require(_amount >0, "Amount must be higher than zero");
         _burn(address(msg.sender),_amount);
     }
 
 
-    function mint(uint256 amount) public onlyOwner {
-        _mint(address(msg.sender), amount);
+    function mint(uint256 _amount) public onlyOwner {
+        require(_amount >0, "Amount must be higher than zero");
+        _mint(address(msg.sender), _amount);
     }
+
+    
+   /*  function buy(uint256 _amount) external payable {
+        // e.g. the buyer wants 100 tokens, needs to send 500 wei
+        require(msg.value == _amount * cost, 'Need to send exact amount of wei');
+        transfer(msg.sender, _amount);
+    }
+    
+    function sell(uint256 _amount) external {
+        // decrement the token balance of the seller
+        balances[msg.sender] -= _amount;
+        balances[address(this)] += _amount;
+        payable(msg.sender).transfer(_amount * cost);
+    } */
 
 }

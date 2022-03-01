@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Dashboard.css';
 
 import { AppContext } from '../../AppContext';
 
 const Dashboard = () => {
-
     let { tokenData, ownerAccount, account, decimals } = useContext(AppContext);
+
     const [input,setInput] = useState({
         mint:'0',
         burn:'0',
@@ -14,6 +14,7 @@ const Dashboard = () => {
         buy:'0',
         sell:'0',
     })
+    const [price,setPrice] = useState("0");
 
     const burnOrMint = async(type) =>{
         if(parseInt(input[type])<1){
@@ -31,8 +32,17 @@ const Dashboard = () => {
         }
         else{
             if(type=="buy"){
-                await tokenData.basicToken.methods.transfer(tokenData.address_owner,parseInt(buysell[type])).send({from:account})
+                await tokenData.basicToken.methods.transfer(tokenData.address_owner,parseInt(buysell[type])).send({from:account});
             }
+        }
+    }
+
+    const changeTokenPrice = async() =>{
+        if(parseInt(price)<1){
+            alert("Value must be greater than 0");
+        }
+        else{
+            await tokenData.basicToken.methods.changePriceOfToken(parseInt(price)).send({from:account})
         }
     }
 
@@ -110,6 +120,17 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            {ownerAccount && <div className='dashboard__container'>
+                <div className='dashboard__info'>
+                    <h2>Change Price</h2>
+                    <div className='dashboard__info__inner'>
+                        <input type="text" onChange={(e) => setPrice(e.target.value)}
+                        value={price} />
+                        <img src="./token_img.png" className='img__token' />
+                        <button onClick={()=>changeTokenPrice()}>Change</button>
+                    </div>
+                </div>
+            </div>}
         </div>
     )
 }
