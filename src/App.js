@@ -22,6 +22,7 @@ import Stake from './Components/Stake/Stake';
 const App = () => {
   const [account, setAccount] = useState("0x00");
   const [open, setOpen] = useState(false);
+  const [decimals, SetDecimals] = useState(10**18);
   const [ownerAccount, setOwnerAccout] = useState(false);
   const [tokenData, setTokenData] = useState({
     basicToken:null,
@@ -63,6 +64,8 @@ const App = () => {
       const address_owner = await basicToken.methods.owner().call();
       const totalSupply = await basicToken.methods.totalSupply().call();
       const cost = await basicToken.methods.cost().call();
+      const tokenAddress = basicTokenData.address;
+
       console.log(totalSupply.toString())
       setTokenData({
         ...tokenData,
@@ -70,6 +73,8 @@ const App = () => {
         basicTokenBalance: basicTokenBalance.toString() || 0,
         yourBalance: yourBalance.toString() || 0,
         totalSupply: totalSupply.toString() || 0,
+        tokenAddress:tokenAddress,
+        address_owner:address_owner,
         cost: parseFloat(cost).toFixed(2).toString() || 0
       });
       setOwnerAccout(accounts[0] == address_owner);
@@ -89,7 +94,7 @@ const App = () => {
   }, [])
   return (
     <div>
-      <AppContext.Provider value={{ tokenData: tokenData, ownerAccount: ownerAccount, account:account }}>
+      <AppContext.Provider value={{ tokenData: tokenData, ownerAccount: ownerAccount, account:account, decimals:decimals}}>
         <Navbar account={account} setOpen={() => setOpen(!open)} />
         <div style={{
           display: "flex",

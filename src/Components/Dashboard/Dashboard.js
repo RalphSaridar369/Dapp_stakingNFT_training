@@ -5,7 +5,7 @@ import { AppContext } from '../../AppContext';
 
 const Dashboard = () => {
 
-    let { tokenData, ownerAccount, account } = useContext(AppContext);
+    let { tokenData, ownerAccount, account, decimals } = useContext(AppContext);
     const [input,setInput] = useState({
         mint:'0',
         burn:'0',
@@ -20,9 +20,8 @@ const Dashboard = () => {
             alert("Value must be greater than 0");
         }
         else{
-            let test = await tokenData.basicToken.methods[type==="mint"?'mint':'burnTokens'](parseInt(input[type])).send({from:account});
-            let TS = await tokenData.basicToken.methods.balanceOf(account).call()
-            console.log(TS.toString(), "  ",test.toString())
+            await tokenData.basicToken.methods[type==="mint"?'mint':'burnTokens'](parseInt(input[type])).send({from:account});
+            await tokenData.basicToken.methods.balanceOf(account).call()
         }
     }
 
@@ -31,7 +30,9 @@ const Dashboard = () => {
             alert("Value must be greater than 0");
         }
         else{
-            
+            if(type=="buy"){
+                await tokenData.basicToken.methods.transfer(tokenData.address_owner,parseInt(buysell[type])).send({from:account})
+            }
         }
     }
 
@@ -41,7 +42,7 @@ const Dashboard = () => {
                 {ownerAccount && <div className='dashboard__info'>
                     <h2>Tokens left</h2>
                     <div className='dashboard__info__inner'>
-                        <p className='tokens__left'>{tokenData.yourBalance}</p>
+                        <p className='tokens__left'>{tokenData.basicTokenBalance}</p>
                         <img src="./token_img.png" className='img__token' />
                     </div>
                 </div>}
@@ -64,7 +65,7 @@ const Dashboard = () => {
                 <div className='dashboard__info'>
                     <h2>Price</h2>
                     <div className='dashboard__info__inner'>
-                        <p className='tokens__left'>${tokenData.cost}</p>
+                        <p className='tokens__left'>ETH {tokenData.cost/decimals}</p>
                         <img src="./token_img.png" className='img__token' />
                     </div>
                 </div>
