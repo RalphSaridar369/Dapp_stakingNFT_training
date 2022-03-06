@@ -32,25 +32,26 @@ const Dashboard = () => {
         }
         else{
             if(type=="buy"){
-                await tokenData.basicToken.methods.transfer(tokenData.address_owner,parseInt(buysell[type])).send({from:account});
+                console.log((buysell[type] * tokenData.cost * 10 ** 18+"").length)
+                await tokenData.basicToken.methods.sendViaTransfer(tokenData.tokenAddress).send({from:account});
             }
         }
     }
 
-    const changeTokenPrice = async() =>{
-        console.log(price===1*10**18)
-        console.log(price.toString().length,"\n",(1*10**18).toString().length)
-        console.log(typeof price, "\n", typeof(1*10**18))
-        if(price==1*10**18){
-            alert(true)
-        }
-        if((price*10**18)<5 * 10**16){
-            alert("Value must be greater than 0.01");
-        }
-        else{
-            await tokenData.basicToken.methods.changePriceOfToken(price*10**18+"").send({from:account})
-        }
-    }
+    // const changeTokenPrice = async() =>{
+    //     console.log(price===1*10**18)
+    //     console.log(price.toString().length,"\n",(1*10**18).toString().length)
+    //     console.log(typeof price, "\n", typeof(1*10**18))
+    //     if(price==1*10**18){
+    //         alert(true)
+    //     }
+    //     if((price*10**18)<5 * 10**16){
+    //         alert("Value must be greater than 0.01");
+    //     }
+    //     else{
+    //         await tokenData.basicToken.methods.changePriceOfToken(price*10**18+"").send({from:account})
+    //     }
+    // }
     return (
         <div className='dashboard'>
             <div className='dashboard__container'>
@@ -125,7 +126,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            {ownerAccount && <div className='dashboard__container'>
+            {/* {ownerAccount && <div className='dashboard__container'>
                 <div className='dashboard__info'>
                     <h5>Change Price</h5>
                     <div className='dashboard__info__inner'>
@@ -135,7 +136,7 @@ const Dashboard = () => {
                         <button onClick={()=>changeTokenPrice()}>Change</button>
                     </div>
                 </div>
-            </div>}
+            </div>} */}
         </div>
     )
 }
